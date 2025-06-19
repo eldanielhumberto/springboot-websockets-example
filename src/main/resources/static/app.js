@@ -47,6 +47,8 @@ const sendMessage = () => {
 			date: new Date(),
 		}),
 	});
+
+	$('#messageInput').val('');
 };
 
 const sendLogin = () => {
