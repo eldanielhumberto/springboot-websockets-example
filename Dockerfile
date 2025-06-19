@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk-alpine AS builder
+FROM eclipse-temurin:23-jdk AS builder
 
 WORKDIR /app
 
@@ -8,7 +8,7 @@ RUN ./mvnw clean package -DskipTests
 
 #
 
-FROM openjdk:8-jdk-alpine
+FROM eclipse-temurin:23-jre
 
 WORKDIR /app
 
