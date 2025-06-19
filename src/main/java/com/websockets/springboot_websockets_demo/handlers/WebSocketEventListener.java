@@ -9,6 +9,9 @@ import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 
 import com.websockets.springboot_websockets_demo.utils.GlobalData;
 
+/*
+ * Manage the connection and disconnection of users.
+ */
 @Component
 public class WebSocketEventListener {
     @Autowired

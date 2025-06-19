@@ -13,6 +13,7 @@ stompClient.onStompError = (frame) => {
 	console.error('Additional details: ' + frame.body);
 };
 
+// Receive connected users
 stompClient.onConnect = (frame) => {
 	console.log(frame.command);
 
@@ -20,6 +21,7 @@ stompClient.onConnect = (frame) => {
 		$('#usersOnlineText').html('Users online: ' + count.body);
 	});
 
+	// Receive messages
 	stompClient.subscribe('/topic/messages', (message) => {
 		const body = JSON.parse(message.body);
 		const date = new Date(body.date);
@@ -37,6 +39,7 @@ stompClient.onConnect = (frame) => {
 	});
 };
 
+// Send message to server
 const sendMessage = () => {
 	const textMessage = $('#messageInput').val();
 	stompClient.publish({
@@ -52,10 +55,14 @@ const sendMessage = () => {
 };
 
 const sendLogin = () => {
+	// Set username
 	username = $('#usernameInput').val();
 	$('#username').html('Username: ' + username);
 
+	// Activate server connection
 	stompClient.activate();
+
+	// Remove registration form
 	setChatMode();
 };
 
@@ -70,8 +77,10 @@ const setChatMode = () => {
 };
 
 $(() => {
+	// Activate registration form
 	setLoginMode();
 
+	// Request number of users connected to the server
 	fetch('http://localhost:8080/api/usersCount').then((e) => {
 		e.json().then((response) => {
 			const n = response + 1;
